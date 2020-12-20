@@ -33,6 +33,7 @@ package designpatterns.creational.singleton;
  * - Any class can be sub-classed into a singleton.
  * 
  * troubles:
+ * - it's a direct violation of the "single responsibility" principle!
  * - When singletons perform application logic, one area of your app
  *   may not know about changes another area of the app is trying to 
  *   apply.

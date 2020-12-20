@@ -7,11 +7,9 @@ package designpatterns.creational.abstractfactory;
  * 
  * The abstract factory is an extension of the regular factory method pattern. 
  * Instead of creating a single type of object, it's now responsible for 
- * creating a family of related objects(two or more).
- * 
- * A "factory method pattern" implementation that returns multiple sorts of 
- * objects but are not in any way related(aside from Java's "Object") does not 
- * count as an abstract factory.
+ * creating a family of related objects(two or more). Extending the utility
+ * of a regular factory blurring it's original intent turns it into an 
+ * abstract factory.
  * 
  * benefit:
  * - prevents showing concrete implementing classes, like factories should
@@ -30,30 +28,22 @@ public class MainAbstractFactory
 		
 		ItemFactory ifactory = new GoodItemFactory();
 		
-		Item item = ifactory.getNewIngredient();
+		Ingredient item = ifactory.getNewIngredient();
 		
-		System.out.println( item.getName() );
+		System.out.println( item.isAnyGood() );
 		
 	}
 }
 
 /*
- * create a root interfaces that demonstrate the relationship between all objects the factory can produce.
+ * make interfaces that are somewhat related
  */
-interface Item
-{
-	String getName();
-}
-
-/*
- * make interfaces that implement the root interface
- */
-interface Material extends Item
+interface Material
 {
 	String isValuable();
 }
 
-interface Ingredient extends Item
+interface Ingredient
 {
 	String isAnyGood();
 }
@@ -68,12 +58,6 @@ class BadMaterial implements Material
 	{
 		return "dirt..";
 	}
-
-	@Override
-	public String getName()
-	{
-		return "bad material";
-	}
 }
 
 class GoodMaterial implements Material
@@ -82,12 +66,6 @@ class GoodMaterial implements Material
 	public String isValuable()
 	{
 		return "ggoooolllddd!!!";
-	}
-
-	@Override
-	public String getName()
-	{
-		return "good material";
 	}
 }
 
@@ -98,12 +76,6 @@ class BadIngredient implements Ingredient
 	{
 		return "definetely rotten";
 	}
-
-	@Override
-	public String getName()
-	{
-		return "bad ingredient";
-	}
 }
 
 class GoodIngredient implements Ingredient
@@ -112,12 +84,6 @@ class GoodIngredient implements Ingredient
 	public String isAnyGood()
 	{
 		return "fresh and peachy";
-	}
-
-	@Override
-	public String getName()
-	{
-		return "good ingredient";
 	}
 }
 
