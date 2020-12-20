@@ -1,6 +1,8 @@
 package designpatterns.creational.singleton;
 
 /*
+ * Singleton Pattern
+ * 
  * The singleton pattern's purpose is to ensure a single global point 
  * of access to a class's logic. It is a simple trick that gives a 
  * lot of power in your application. Use it only when it makes sense.
@@ -8,19 +10,26 @@ package designpatterns.creational.singleton;
  * In Object-Oriented Programming this pattern is generally frowned 
  * upon because it breaks the programming paradigm. If it's abused,
  * the project quickly becomes a spaghetti of references and might 
- * become prone to concurrency issues.
+ * become prone to concurrency issues and confusion.
  * 
  * Having that said, singletons do have a place in application 
- * programming that would be considered acceptable. The primary use 
- * of a singleton is when information is a one-way street. The best 
- * example is a data logger. Information goes in and has no impact on 
- * the application's logic. Another purpose is to prevent wasting 
- * resources when needing common functionality, like utility classes.
+ * programming that might be considered acceptable. The primary use 
+ * for a singleton is when information is a one-way street.
+ * - The best example is a data logger. Information goes into the logger 
+ *   and gets dumped somewhere. Booting the application with the logger 
+ *   disabled will not impact the internal logic. 
+ * - Another purpose for singletons is to prevent wasting resources 
+ *   when needing common functionality like utility classes. 
+ * - Sometimes instantiating new objects might be a costly operation 
+ *   where singletons act as an optimization strategy. However this 
+ *   can also be accomplished with the monostate- or the prototype 
+ *   pattern.
  * 
  * benefit:
  * - A single global point of access can be used anywhere in your 
- *   project.
- * - Can be lazy loaded, thus not using space, until it's needed
+ *   project. You get it's power whenever you need it at any place, 
+ *   any time.
+ * - Can be lazy loaded, thus not using space, until it's needed.
  * - Any class can be sub-classed into a singleton.
  * 
  * troubles:
@@ -30,7 +39,7 @@ package designpatterns.creational.singleton;
  * - Tracing bugs related to singleton I/O logic can be difficult to 
  *   fix. Specially when your project is getting large.
  * - Lost instance references may cause the singleton not to be garbage 
- *   collected properly, wasting resources
+ *   collected properly, wasting resources.
  * - Lazy loaded singletons will always perform a conditional check 
  *   before returning the instance.
  * 

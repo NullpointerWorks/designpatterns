@@ -3,9 +3,12 @@ package designpatterns.creational.factorymethod;
 /**
  * @see simple factory pattern
  * 
- * definition: "Define an interface for creating an object, but let subclasses decide which class to instantiate. Factory Method lets a class defer instantiation to subclasses"
+ * definition: "Define an interface for creating an object, but let 
+ * subclasses decide which class to instantiate. Factory Method lets 
+ * a class defer instantiation to subclasses"
  * 
- * Factory method pattern adds a layer of abstraction compared to the "simple factory".
+ * Factory method pattern adds a layer of abstraction compared to the 
+ * "simple factory".
  * 
  * benefit:
  * - the added abstraction layer removes dependencies 

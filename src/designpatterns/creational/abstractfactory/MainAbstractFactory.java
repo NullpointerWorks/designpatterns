@@ -5,16 +5,22 @@ package designpatterns.creational.abstractfactory;
  * 
  * Abstract Factory Pattern
  * 
+ * The abstract factory is an extension of the regular factory method pattern. 
+ * Instead of creating a single type of object, it's now responsible for 
+ * creating a family of related objects(two or more).
  * 
- * 
- * 
+ * A "factory method pattern" implementation that returns multiple sorts of 
+ * objects but are not in any way related(aside from Java's "Object") does not 
+ * count as an abstract factory.
  * 
  * benefit:
- * - the added abstraction layer removes dependencies 
- * - no new code needed to include new factories, just pass the interface
- * - 
+ * - prevents showing concrete implementing classes, like factories should
+ * - ensures all created objects share a root interface (a family of objects)
+ *   including a consistent set of base methods
  * 
  * troubles:
+ * - you don't always know what kind of object hides behind the interface. 
+ *   casting these objects might become a problem.
  * 
  */
 public class MainAbstractFactory
@@ -27,18 +33,22 @@ public class MainAbstractFactory
 		Item item = ifactory.getNewIngredient();
 		
 		System.out.println( item.getName() );
+		
 	}
 }
 
 /*
- * 
+ * create a root interfaces that demonstrate the relationship between all objects the factory can produce.
  */
 interface Item
 {
 	String getName();
 }
 
-interface Loot extends Item
+/*
+ * make interfaces that implement the root interface
+ */
+interface Material extends Item
 {
 	String isValuable();
 }
@@ -48,33 +58,36 @@ interface Ingredient extends Item
 	String isAnyGood();
 }
 
-class BadLoot implements Loot
+/*
+ * make implementing classes. this example shows two factories that make good and bad items
+ */
+class BadMaterial implements Material
 {
 	@Override
 	public String isValuable()
 	{
-		return "meh..";
+		return "dirt..";
 	}
 
 	@Override
 	public String getName()
 	{
-		return "bad loot";
+		return "bad material";
 	}
 }
 
-class GoodLoot implements Loot
+class GoodMaterial implements Material
 {
 	@Override
 	public String isValuable()
 	{
-		return "boss weapons!!";
+		return "ggoooolllddd!!!";
 	}
 
 	@Override
 	public String getName()
 	{
-		return "good loot";
+		return "good material";
 	}
 }
 
@@ -109,20 +122,23 @@ class GoodIngredient implements Ingredient
 }
 
 /*
- * 
+ * make a factory interface returning the two related interfaces.
  */
 interface ItemFactory
 {
-	Loot getNewLoot();
+	Material getNewMaterial();
 	Ingredient getNewIngredient();
 }
 
+/*
+ * make two implementing factory classes
+ */
 class BadItemFactory implements ItemFactory
 {
 	@Override
-	public Loot getNewLoot()
+	public Material getNewMaterial()
 	{
-		return new BadLoot();
+		return new BadMaterial();
 	}
 
 	@Override
@@ -135,9 +151,9 @@ class BadItemFactory implements ItemFactory
 class GoodItemFactory implements ItemFactory
 {
 	@Override
-	public Loot getNewLoot()
+	public Material getNewMaterial()
 	{
-		return new GoodLoot();
+		return new GoodMaterial();
 	}
 
 	@Override

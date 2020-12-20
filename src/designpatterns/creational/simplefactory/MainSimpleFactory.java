@@ -7,11 +7,12 @@ import java.util.Random;
  * 
  * This pattern is used when the instantiation of objects require complex algorithms, or when it's not always 
  * clear what sort of subclass is required, or need to take specific configurations into account. They can be 
- * rather simple or very complicated. Either way, factories are usually beneficial to your project.
+ * rather simple or very complicated. Either way, factories are usually beneficial to your project. Weirdly,
+ * if you're in the position to make a simple factory, just take an extra minute to make it a proper factory 
+ * by adding some abstraction (@see factory method pattern).
  * 
  * For example, the creation of enemies in a game may depend on a random factor along side the state of the 
  * game. The creation is therefore encapsulated inside the factory, instead of the calling class.
- * 
  * 
  * benefit:
  * - makes debugging easier by localizing creation code
@@ -20,7 +21,8 @@ import java.util.Random;
  * - makes future instantiation a lot easier to code
  * 
  * troubles:
- * - the factory does not have an interface to generalize the functionality. 
+ * - this pattern lacks abstraction. when passed as an argument or during instantiation, you always know exactly 
+ *   what you're dealing with including it's dependencies.
  * - a simple solution to a simple problems, but doesn't solve growing problems
  * 
  */
