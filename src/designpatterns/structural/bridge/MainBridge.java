@@ -21,9 +21,8 @@ package designpatterns.structural.bridge;
  * and duplicate code. This is to be avoided.
  * 
  * The second option is the obvious solution. Just turn the attributes into fields.
- * And that's the "bridge pattern". It's so simple and obvious even programmers who 
- * don't know about this pattern implement it. This is why it has become a design 
- * pattern. A common solution to a potentially big problem.
+ * And that's the "bridge pattern". It's so simple even programmers who don't know 
+ * about this pattern implement it. 
  * 
  * benefit:
  * - saves a lot of copy-pasta
