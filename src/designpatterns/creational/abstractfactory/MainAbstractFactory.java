@@ -6,13 +6,15 @@ package designpatterns.creational.abstractfactory;
  * Abstract Factory Pattern
  * 
  * The abstract factory is an extension of the regular factory method pattern. 
- * Instead of creating a single type of object, it's now responsible for 
- * creating a family of related objects(two or more). Extending the utility
- * of a regular factory blurring it's original intent turns it into an 
- * abstract factory.
+ * Instead of being responsible for creating a single type of object, it now
+ * creates multiple of objects that are somewhat related. These objects do not
+ * have to be related to each other with a common interface. 
  * 
  * benefit:
  * - prevents showing concrete implementing classes, like factories should
+ * 
+ * - since all 
+ * 
  * - ensures all created objects share a root interface (a family of objects)
  *   including a consistent set of base methods
  * 
