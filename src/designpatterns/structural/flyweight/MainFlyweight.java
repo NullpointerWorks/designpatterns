@@ -1,14 +1,13 @@
 package designpatterns.structural.flyweight;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
 
 /*
  * Flyweight Pattern
+ * 
  * 
  * 
  */
@@ -18,35 +17,17 @@ public class MainFlyweight
 	{
 		final String line = "Test to be parsed by the pattern.";
 		
-		/*
-		 * parse and show the line of text without using a flyweight
-		 */
-		List<LetterWrapper> letters = new ArrayList<LetterWrapper>();
-		for (int i=0,l=line.length(); i<l; i++)
-		{
-			String letter = line.substring(i,i+1);
-			LetterWrapper lw = new LetterWrapper(letter);
-			letters.add(lw);
-		}
-		for (LetterWrapper lw : letters)
+		FlyweightList flyweight = new FlyweightList();
+		LetterWrapper[] sentence = flyweight.getText(line);
+
+		System.out.print("target text    : "+line);
+		System.out.print("\nrequested text : ");
+		for (LetterWrapper lw : sentence)
 		{
 			System.out.print(lw.getLetter());
 		}
-		System.out.println();
-		
-		/*
-		 * 
-		 */
-		FlyweightList flyweight = new FlyweightList();
-		for (int i=0,l=line.length(); i<l; i++)
-		{
-			String letter = line.substring(i,i+1);
-			flyweight.add(letter);
-		}
+		System.out.print("\nstored letters : ");
 		flyweight.showLetters();
-		
-		
-		
 	}
 }
 
@@ -75,20 +56,42 @@ class LetterWrapper
  */
 class FlyweightList
 {
-	private Map<String, LetterWrapper> letters = new HashMap<String, LetterWrapper>();
+	private Map<String, LetterWrapper> letters;
 	
 	public FlyweightList()
 	{
-		
+		letters = new HashMap<String, LetterWrapper>();
 	}
 	
-	public void add(String letter)
+	public LetterWrapper[] getText(String line) 
 	{
-		if (!letters.containsKey(letter))
+		int i=0;
+		int l=line.length();
+		LetterWrapper[] arr = new LetterWrapper[l];
+		
+		for (; i<l; i++)
 		{
-			LetterWrapper lw = new LetterWrapper(letter);
+			arr[i] = add(line.substring(i,i+1));
+		}
+		
+		return arr;
+	}
+
+	public LetterWrapper add(String letter)
+	{
+		LetterWrapper lw;
+		
+		if (letters.containsKey(letter))
+		{
+			lw = letters.get(letter);
+		}
+		else
+		{
+			lw = new LetterWrapper(letter);
 			letters.put(letter, lw);
 		}
+		
+		return lw;
 	}
 	
 	public void showLetters()
