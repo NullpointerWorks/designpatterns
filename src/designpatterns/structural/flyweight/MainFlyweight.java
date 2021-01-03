@@ -19,9 +19,8 @@ public class MainFlyweight
 		
 		FlyweightList flyweight = new FlyweightList();
 		LetterWrapper[] sentence = flyweight.getText(line);
-
-		System.out.print("target text    : "+line);
-		System.out.print("\nrequested text : ");
+		
+		System.out.print("requested text : ");
 		for (LetterWrapper lw : sentence)
 		{
 			System.out.print(lw.getLetter());
