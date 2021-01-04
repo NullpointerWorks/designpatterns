@@ -10,8 +10,25 @@ public class MainProxy
 {
 	public static void main(String[] args) 
 	{
+		/*
+		 * make some clients to represent connections
+		 */
+		Client client1 = new Client();
+		Client client2 = new Client();
+		Client client3 = new Client();
 		
+		/*
+		 * make a server using the proxy
+		 */
+		IServer service = new ProxyServer( new Server() );
+		//IServer service = new ChacheProxyServer( new Server() );
 		
+		/*
+		 * do operations
+		 */
+		service.sendQuery( client1.getQuery() );
+		service.sendQuery( client2.getQuery() );
+		service.sendQuery( client3.getQuery() );
 	}
 }
 
@@ -21,15 +38,18 @@ public class MainProxy
  */
 class Server implements IServer
 {
-	public void sendQuery(String sql)
+	public String[] sendQuery(String sql)
 	{
 		// do costly database operation
+		System.out.println( sql );
+		// return a dataset of users
+		return new String[] {"Peter", "James", "Cathy", "Anne"};
 	}
 }
 
 interface IServer
 {
-	void sendQuery(String sql);
+	String[] sendQuery(String sql);
 }
 
 /*
@@ -37,13 +57,17 @@ interface IServer
  */
 class Client
 {
-	
-	
+	public String getQuery()
+	{
+		return "SELECT * FROM USERS";
+	}
 }
 
 /*
  * now for our proxy.
- * 
+ * it takes a service as constructor parameter
+ * the class implements the same interface as the service.
+ * implemented methods just delegate this to the given service.
  * 
  */
 class ProxyServer implements IServer
@@ -55,8 +79,38 @@ class ProxyServer implements IServer
 		service = s;
 	}
 	
-	public void sendQuery(String sql)
+	public String[] sendQuery(String sql)
 	{
-		service.sendQuery(sql);
+		return service.sendQuery(sql);
+	}
+}
+
+/*
+ * adding as an example, 
+ */
+class ChacheProxyServer implements IServer
+{
+	private java.util.Map<String,String[]> cache;
+	private IServer service;
+	
+	public ChacheProxyServer(IServer s)
+	{
+		cache = new java.util.HashMap<String,String[]>();
+		service = s;
+	}
+	
+	public String[] sendQuery(String sql)
+	{
+		String[] dataset;
+		if (cache.containsKey(sql))
+		{
+			dataset = cache.get(sql);
+		}
+		else
+		{
+			dataset = service.sendQuery(sql);
+			cache.put(sql, dataset);
+		}
+		return dataset;
 	}
 }
