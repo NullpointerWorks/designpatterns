@@ -3,29 +3,37 @@ package designpatterns.structural.adapter;
 /*
  * Adapter Pattern
  * 
+ * The intent of the adapter pattern is to make two different interfaces compatible 
+ * by inserting a "middleman" class. The adapter extends/implements the desired 
+ * interface and takes an instance of the object to be cast. 
+ * 
+ * Using adapters usually happens when working with libraries that doesn't have the 
+ * abstract needed to implement its features. 
  * 
  * 
  * benefit:
+ * - Allows for the use of code that wasn't designed with abstraction in mind.
  * 
  * troubles:
+ * - Using this pattern results in more complexity since more classes are necessary 
+ *   that don't add functionality to your project.
  */
 public class MainAdapter
 {
 
 	public static void main(String[] args)
 	{
-		
 		RoundHole someRoundHole = new RoundHole();
 		
 		SquarePeg peg = new SquarePeg();
 		
-		if ( someRoundHole.fits(new Adapter(peg)) )
+		if ( someRoundHole.fits( new Adapter(peg)) )
 		{
 			System.out.println("it fits!");
 		}
 		else
 		{
-			System.out.println("can't square this round.. or something like that");
+			System.out.println("can't circle this square.. or something like that");
 		}
 		
 		
@@ -46,13 +54,18 @@ class RoundHole
 		return radius;
 	}
 	
-	public boolean fits(RoundPeg peg)
+	public boolean fits(SomethingRound peg)
 	{
 		return peg.getRadius() <= radius;
 	}
 }
 
-class RoundPeg
+interface SomethingRound
+{
+	double getRadius();
+}
+
+class RoundPeg implements SomethingRound
 {
 	private double radius = 2.0;
 	
@@ -79,7 +92,7 @@ class SquarePeg
  * the adapter extends the desired library class and takes your implementation as parameter.
  * it then performs all business logic that's required
  */
-class Adapter extends RoundPeg
+class Adapter implements SomethingRound
 {
 	private SquarePeg peg;
 	

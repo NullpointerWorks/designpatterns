@@ -3,7 +3,9 @@ package designpatterns.structural.decorator;
 /*
  * Decorator Pattern
  * 
- * 
+ * Decorators are used to add functionality to a method the base instance doesn't 
+ * contain. It's a lot like a recursive method that calls itself acting like a loop.
+ * Except this loop is limited to number of instances nested together.
  * 
  * benefit:
  * - this pattern makes it easy to separate responsibility to different classes
@@ -102,4 +104,3 @@ class Mozarella implements Pizza
 		return base.getDescription() + " topped with some mozarella";
 	}
 }
-

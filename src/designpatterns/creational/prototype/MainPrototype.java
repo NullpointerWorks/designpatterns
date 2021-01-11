@@ -5,11 +5,6 @@ package designpatterns.creational.prototype;
  * 
  * 
  * 
- * 
- * 
- * 
- * 
- * 
  */
 public class MainPrototype
 {
@@ -58,6 +53,3 @@ class DittoClass implements Prototype
 		return new DittoClass(someInfo);
 	}
 }
-
-
-

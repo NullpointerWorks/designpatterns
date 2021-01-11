@@ -3,10 +3,8 @@ package designpatterns.structural.facade;
 /*
  * Facade Pattern
  * 
- * 
- * 
- * 
- * 
+ * This pattern is rather straightforward. Even programmers who don't know this 
+ * pattern have still unknowingly implemented it in their projects. 
  * 
  */
 public class MainFacade 

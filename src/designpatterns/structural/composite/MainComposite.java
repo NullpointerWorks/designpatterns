@@ -6,13 +6,15 @@ import java.util.List;
 /*
  * Composite Pattern
  * 
- * 
- * 
- * 
+ * This pattern can be viewed as a tree structure/node system. Each element in the tree
+ * implement the same interface, though nodes have aggregation methods. 
  * 
  * benefit:
+ * - 
  * 
  * troubles:
+ * - it's uses are likely only limited to tree structures
+ * 
  */
 public class MainComposite
 {
