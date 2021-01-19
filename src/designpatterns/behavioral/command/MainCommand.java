@@ -2,6 +2,9 @@ package designpatterns.behavioral.command;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.List;
+
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.JButton;
@@ -21,15 +24,17 @@ public class MainCommand
 	
 	public MainCommand()
 	{
+		CommandHistory history = new CommandHistory();
+		
 		JPanel panel = new JPanel();
 		panel.setSize(400,320);
 		panel.setPreferredSize(panel.getSize());
 		
 		Button button = new Button();
-		button.setText("Save command");
+		button.setText("Click me!!");
 		button.setSize(140,40);
 		button.setPreferredSize(button.getSize());
-		button.setCommand(new SaveCommand());
+		button.setCommand(new ClickCommand(), history);
 		panel.add(button);
 		
 		JFrame window = new JFrame();
@@ -39,30 +44,30 @@ public class MainCommand
 		window.setLocationRelativeTo(null);
 		window.setVisible(true);
 	}
-	
 }
 
 class Button extends JButton implements ActionListener
 {
 	private static final long serialVersionUID = -5245394995966152954L;
 	
-	public Command command;
+	private CommandHistory history;
+	private Command command = new NullCommand();
 	
 	public Button()
 	{
-		super();
-		command = new NullCommand();
 		addActionListener(this);
 	}
 	
-	public void setCommand(Command cmd)
+	public void setCommand(Command cmd, CommandHistory his)
 	{
 		command = cmd;
+		history = his;
 	}
 	
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
+		history.push(command);
 		command.execute();
 	}
 }
@@ -83,9 +88,9 @@ class NullCommand implements Command
 	public void execute() {}
 }
 
-class SaveCommand implements Command
+class ClickCommand implements Command
 {
-	public SaveCommand()
+	public ClickCommand()
 	{
 		
 	}
@@ -93,6 +98,27 @@ class SaveCommand implements Command
 	@Override
 	public void execute() 
 	{
-		System.out.println("Executing save command..");
+		System.out.println("Executing a clicking command..");
+	}
+}
+
+/*
+ * a class to keep track of all previous commands.
+ */
+class CommandHistory
+{
+	private List<Command> history = new ArrayList<Command>();
+	
+	public CommandHistory() {}
+	
+	public void push(Command cmd)
+	{
+		history.add(cmd);
+	}
+	
+	public Command pop()
+	{
+		int i = history.size()-1;
+		return history.remove(i);
 	}
 }
