@@ -5,12 +5,15 @@ package designpatterns.behavioral.iterator;
  * 
  * The primary purpose of an iterator is to hide the internal implementation of a list.
  * This helps prevent the programmer from modifying the content of the list and not 
- * disturb any background algorithms that may be running. In other words, it helps to
- * keep the integrity of the list.
+ * disturb any background algorithms that may be running. Since each iterator has its 
+ * own state you can stop the loop and run another in parallel. 
  * 
  * The neat thing about an iterator is that it can be implemented using a while loop.
  * The implementation will need two methods. One to determine if the end of the list has 
  * been found, and another to expose an element of the list.
+ * 
+ * This includes complex data structures like trees and embedded lists. The method of 
+ * iteration can be determined by the implementation.
  * 
  */
 public class MainIterator
