@@ -7,8 +7,8 @@ import java.util.List;
  * Model-View-Adapter Pattern
  * 
  * Similar to MVC and MVP, this is another approach to separate the front-end from 
- * the back-end. The aim of MVA is to entirely decoupling the Model and View objects 
- * so that all interaction is done through the Adapter class.
+ * the back-end. The aim of MVA is to entirely decoupling the Model and View making 
+ * sure all interaction is done through the Adapter class. 
  * 
  * Note: the MVA adapter class is not related to the Adapter Pattern
  * 
@@ -31,7 +31,7 @@ public class MainModelViewAdapter
 }
 
 /*
- * back-end
+ * data structure
  * 
  * these represent dynamic data structures that make up the state of the application
  */
@@ -74,7 +74,7 @@ class View
 }
 
 /*
- * mediator between front- and back-end
+ * mediating controller between front- and back-end
  */
 class Adapter
 {
