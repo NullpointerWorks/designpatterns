@@ -70,33 +70,25 @@ class Model
  */
 class View
 {
-	private ActionListener alStore = (e)->
-	{
-		
-	};
-	
-	private ActionListener alPrint = (e)->
-	{
-		
-	};
+	private JTextArea textarea;
+	private JButton store;
+	private JButton print;
 	
 	public View()
 	{
-		JTextArea textarea = new JTextArea();
+		textarea = new JTextArea();
 		textarea.setLineWrap(true);
 		textarea.setWrapStyleWord(true);
 		textarea.setSize(100,30);
 		textarea.setPreferredSize(textarea.getSize());
 
-		JButton button = new JButton();
-		button.setText("Store");
-		button.addActionListener(alStore);
-		button.setSize(100,60);
-		button.setPreferredSize(button.getSize());
+		store = new JButton();
+		store.setText("Store");
+		store.setSize(100,60);
+		store.setPreferredSize(store.getSize());
 		
-		JButton print = new JButton();
+		print = new JButton();
 		print.setText("Print");
-		print.addActionListener(alPrint);
 		print.setSize(100,60);
 		print.setPreferredSize(print.getSize());
 		
@@ -115,7 +107,7 @@ class View
 		
 		gbc.gridx = 1;
 	    gbc.gridheight = 1;
-		panel.add(button, gbc);
+		panel.add(store, gbc);
 		
 	    gbc.gridy = 1;
 		panel.add(print, gbc);
@@ -128,9 +120,19 @@ class View
 		window.setVisible(true);
 	}
 	
-	public void showConsoleData(String[] msg)
+	public void setTextAreaData(String data)
 	{
-		for (String s : msg) showConsoleData(s);
+		textarea.setText(data);
+	}
+	
+	public String getTextAreaData()
+	{
+		return textarea.getText();
+	}
+	
+	public void setStoreCommand(ActionListener al)
+	{
+		store.addActionListener(al);
 	}
 	
 	public void showConsoleData(String msg)

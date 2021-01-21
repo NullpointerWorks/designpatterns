@@ -1,17 +1,13 @@
 package architecturalpatterns.mvc;
 
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
 import java.awt.event.ActionListener;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
 
 /**
+ * TODO
+ * 
  * Model-View-Controller Pattern
  * 
  * An architectural pattern to help separate UI code from the back-end code. 
@@ -40,9 +36,6 @@ public class MainModelViewController
 		Controller ctrl = new Controller();
 
 		model.attach(view);
-		
-		
-		
 		
 		
 	}
@@ -102,50 +95,7 @@ class View
 	
 	public View()
 	{
-		JTextArea textarea = new JTextArea();
-		textarea.setLineWrap(true);
-		textarea.setWrapStyleWord(true);
-		textarea.setSize(100,30);
-		textarea.setPreferredSize(textarea.getSize());
-
-		JButton button = new JButton();
-		button.setText("Store");
-		button.addActionListener(alStore);
-		button.setSize(100,60);
-		button.setPreferredSize(button.getSize());
 		
-		JButton print = new JButton();
-		print.setText("Print");
-		print.addActionListener(alPrint);
-		print.setSize(100,60);
-		print.setPreferredSize(print.getSize());
-		
-		GridBagConstraints gbc = new GridBagConstraints();
-		JPanel panel = new JPanel();
-		panel.setLayout( new GridBagLayout() );
-		panel.setSize(320,240);
-		panel.setPreferredSize(panel.getSize());
-		
-		gbc.gridx = 0;
-	    gbc.gridy = 0;
-	    gbc.gridheight = 2;
-	    gbc.gridwidth = 1;
-	    gbc.fill = GridBagConstraints.VERTICAL;
-		panel.add(textarea, gbc);
-		
-		gbc.gridx = 1;
-	    gbc.gridheight = 1;
-		panel.add(button, gbc);
-		
-	    gbc.gridy = 1;
-		panel.add(print, gbc);
-		
-		JFrame window = new JFrame();
-		window.add(panel);
-		window.pack();
-		window.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		window.setLocationRelativeTo(null);
-		window.setVisible(true);
 	}
 	
 	public void update()
