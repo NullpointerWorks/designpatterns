@@ -1,4 +1,4 @@
-package designpatterns.architectural.mvc;
+package architecturalpatterns.mvc;
 
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
@@ -38,10 +38,10 @@ public class MainModelViewController
 		Model model = new Model();
 		View view = new View();
 		Controller ctrl = new Controller();
+
+		model.attach(view);
 		
-		ctrl.setModel(model);
-		model.setView(view);
-		view.setController(ctrl);
+		
 		
 		
 		
@@ -54,15 +54,28 @@ public class MainModelViewController
  */
 class Model
 {
-	private View view;
+	private List<View> views = new ArrayList<View>();
 	private List<String> data = new ArrayList<String>();
 	
-	public void setView(View v) 
+	public void attach(View v) 
 	{
-		view = v;
+		if (!views.contains(v)) views.add(v);
 	}
-
-	public void setNewData(String d) 
+	
+	public void detach(View v) 
+	{
+		if (views.contains(v)) views.remove(v);
+	}
+	
+	public void update()
+	{
+		for (View v : views)
+		{
+			v.update();
+		}
+	}
+	
+	public void addData(String d) 
 	{
 		data.add(d);
 	}
@@ -79,9 +92,7 @@ class View
 	
 	private ActionListener alStore = (e)->
 	{
-		// send a command to the controller to store data
-		var txtarea = (JTextArea)e.getSource();
-		ctrl.pushCommand( new StoreCommand(txtarea) );
+		
 	};
 	
 	private ActionListener alPrint = (e)->
@@ -137,6 +148,11 @@ class View
 		window.setVisible(true);
 	}
 	
+	public void update()
+	{
+		
+	}
+	
 	public void printDataToConsole(String msg)
 	{
 		System.out.println(msg);
@@ -162,50 +178,4 @@ class Controller
 		model = m;
 	}
 	
-	public void pushCommand(Command cmd)
-	{
-		
-		
-		
-	}
-	
-}
-
-/*
- * Command Pattern
- * 
- * I'm adding this to encapsulate business logic into discrete classes
- * as to separate responsibility and decouple dependencies. This example
- * doesn't use a command history.
- * 
- */
-interface Command
-{
-	void execute();
-}
-
-class PrintCommand implements Command
-{
-	@Override
-	public void execute() 
-	{
-		
-	}
-}
-
-class StoreCommand implements Command
-{
-	private String data = "";
-	
-	public StoreCommand() {}
-	public StoreCommand(JTextArea ta) 
-	{
-		data = ta.getText();
-	}
-	
-	@Override
-	public void execute() 
-	{
-		//model.setNewData(data);
-	}
 }

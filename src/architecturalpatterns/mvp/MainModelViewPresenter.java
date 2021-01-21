@@ -1,4 +1,4 @@
-package designpatterns.architectural.mvp;
+package architecturalpatterns.mvp;
 
 /**
  * 
