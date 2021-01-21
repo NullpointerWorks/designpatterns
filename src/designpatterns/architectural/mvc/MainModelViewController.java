@@ -15,7 +15,7 @@ import javax.swing.JFrame;
  * the model. 
  * 
  * Unlike in MVA, this pattern allows for communication among the view and 
- * the model keeping the controller unaware.
+ * the model keeping the controller unaware. 
  * 
  * 
  * 
