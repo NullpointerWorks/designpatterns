@@ -11,6 +11,12 @@ import javax.swing.JTextField;
 /*
  * front-end
  * 
+ * The adapter is responsible for setting commands for this View object. This keeps
+ * the View oblivious of the Adapter using it making the UI code reusable. 
+ * 
+ * You could choose not to use the Command pattern, but you'd need to add a reference 
+ * of the Adapter in the View to call a method when the button is pressed.
+ * 
  */
 class View
 {
@@ -74,6 +80,7 @@ class View
 		numberR.setText(""+n);
 	}
 	
+	// using the AWT build-in command pattern
 	public void addCalculationListener(ActionListener al)
 	{
 		calc.addActionListener(al);

@@ -1,10 +1,5 @@
 package architecturalpatterns.mvc;
 
-import java.awt.event.ActionListener;
-import java.util.ArrayList;
-import java.util.List;
-
-
 /**
  * TODO
  * 
@@ -34,98 +29,9 @@ public class MainModelViewController
 		Model model = new Model();
 		View view = new View();
 		Controller ctrl = new Controller();
-
+		
 		model.attach(view);
-		
-		
 	}
 }
 
-/*
- * data structures
- * database
- */
-class Model
-{
-	private List<View> views = new ArrayList<View>();
-	private List<String> data = new ArrayList<String>();
-	
-	public void attach(View v) 
-	{
-		if (!views.contains(v)) views.add(v);
-	}
-	
-	public void detach(View v) 
-	{
-		if (views.contains(v)) views.remove(v);
-	}
-	
-	public void update()
-	{
-		for (View v : views)
-		{
-			v.update();
-		}
-	}
-	
-	public void addData(String d) 
-	{
-		data.add(d);
-	}
-}
 
-/*
- * display
- * UI
- * front-end
- */
-class View
-{
-	private Controller ctrl;
-	
-	private ActionListener alStore = (e)->
-	{
-		
-	};
-	
-	private ActionListener alPrint = (e)->
-	{
-		
-	};
-	
-	public View()
-	{
-		
-	}
-	
-	public void update()
-	{
-		
-	}
-	
-	public void printDataToConsole(String msg)
-	{
-		System.out.println(msg);
-	}
-	
-	public void setController(Controller c) 
-	{
-		ctrl = c;
-	}
-	
-}
-
-/*
- * business logic
- * back-end
- */
-class Controller
-{
-	private Model model;
-	
-	public void setModel(Model m) 
-	{
-		model = m;
-	}
-	
-}
