@@ -30,7 +30,10 @@ public class MainModelViewController
 		View view = new View();
 		Controller ctrl = new Controller();
 		
-		model.attach(view);
+		ctrl.setDependency(model, view);
+		model.setDependency(view);
+		
+		
 	}
 }
 

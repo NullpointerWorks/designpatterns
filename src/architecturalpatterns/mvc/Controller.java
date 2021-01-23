@@ -7,10 +7,15 @@ package architecturalpatterns.mvc;
 class Controller
 {
 	private Model model;
+	private View view;
 	
-	public void setModel(Model m)
+	public void setDependency(Model m, View v)
 	{
 		model = m;
+		view = v;
 	}
+	
+	
+	
 	
 }

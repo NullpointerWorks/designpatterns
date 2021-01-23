@@ -1,37 +1,16 @@
 package architecturalpatterns.mvc;
 
-import java.util.ArrayList;
-import java.util.List;
-
 /*
  * data structures
  * database
  */
 class Model
 {
-	private List<View> views = new ArrayList<View>();
-	private List<String> data = new ArrayList<String>();
+	private View view;
 	
-	public void attach(View v) 
+	public void setDependency(View v)
 	{
-		if (!views.contains(v)) views.add(v);
+		view = v;
 	}
 	
-	public void detach(View v) 
-	{
-		if (views.contains(v)) views.remove(v);
-	}
-	
-	public void update()
-	{
-		for (View v : views)
-		{
-			v.update();
-		}
-	}
-	
-	public void addData(String d) 
-	{
-		data.add(d);
-	}
 }
