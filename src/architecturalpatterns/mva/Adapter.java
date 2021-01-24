@@ -22,6 +22,8 @@ class Adapter
 	{
 		model = m;
 		view = v;
+		
+		// using the AWT build-in command pattern
 		view.addCalculationListener( new AdditionCommand(model,view) );
 	}
 }
@@ -32,6 +34,10 @@ class Adapter
  * The String to Integer conversion could be done in the View object, but
  * this can be done in the View as well. When you place the responsibility
  * is up to you.
+ * 
+ * Note: The command implementation knows about the View and the Model, just
+ * like the Adapter class. Which makes these commands Adapters as well.
+ * 
  */
 class AdditionCommand implements ActionListener
 {
@@ -47,17 +53,24 @@ class AdditionCommand implements ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
+		String s1 = view.getNumberOne();
+		String s2 = view.getNumberTwo();
+		int n1,n2;
+		
 		try
 		{
-			int n1 = view.getNumberOne();
-			int n2 = view.getNumberTwo();
-			model.addition(n1, n2);
-			int nR = model.getResult();
-			view.setResult(nR);
+			n1 = Integer.parseInt(s1);
+			n2 = Integer.parseInt(s2);
 		}
 		catch(NumberFormatException ex)
 		{
 			System.err.println("Please enter two integer numbers");
+			// you could update the UI with an error
+			return;
 		}
+		
+		model.addition(n1, n2);
+		int nR = model.getResult();
+		view.setResult(""+nR);
 	}
 }

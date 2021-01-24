@@ -60,27 +60,35 @@ class View
 		window.setLocationRelativeTo(null);
 	}
 	
+	/*
+	 * getters
+	 */
+	public String getNumberOne()
+	{
+		return number1.getText();
+	}
+	
+	public String getNumberTwo()
+	{
+		return number2.getText();
+	}
+	
+	/*
+	 * setters
+	 */
 	public void setVisible(boolean b) 
 	{
 		window.setVisible(b);
     }
 	
-	public int getNumberOne()
+	public void setResult(String n)
 	{
-		return Integer.parseInt( number1.getText() );
+		numberR.setText(n);
 	}
 	
-	public int getNumberTwo()
-	{
-		return Integer.parseInt( number2.getText() );
-	}
-	
-	public void setResult(int n)
-	{
-		numberR.setText(""+n);
-	}
-	
-	// using the AWT build-in command pattern
+	/*
+	 * commands
+	 */
 	public void addCalculationListener(ActionListener al)
 	{
 		calc.addActionListener(al);
