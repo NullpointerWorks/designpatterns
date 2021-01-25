@@ -1,4 +1,4 @@
-package designpatterns.behavioral.momento;
+package designpatterns.behavioral.momento.classic;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
