@@ -1,9 +1,7 @@
-package architecturalpatterns.mvc;
+package architecturalpatterns.mvc1;
 
 /*
  * data structure
- * 
- * these represent dynamic data structures that make up the state of the application
  */
 class Model
 {

@@ -1,4 +1,4 @@
-package architecturalpatterns.mvc;
+package architecturalpatterns.mvc1;
 
 import java.awt.event.ActionListener;
 
@@ -10,13 +10,6 @@ import javax.swing.JTextField;
 
 /*
  * front-end
- * 
- * The adapter is responsible for setting commands for this View object. This keeps
- * the View oblivious of the Adapter using it making the UI code reusable. 
- * 
- * You could choose not to use the Command pattern, but you'd need to add a reference 
- * of the Adapter in the View to call a method when the button is pressed.
- * 
  */
 class View
 {
