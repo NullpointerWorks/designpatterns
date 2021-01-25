@@ -39,7 +39,7 @@ package architecturalpatterns.mvc1;
  *    |______| <-- |____________| <-- |_______|
  * </pre>
  * The View and Model are unaware of eachother's existence. The controller acts as
- * a mediator between the two.
+ * a mediator between the two. 
  * 
  * 
  * 
