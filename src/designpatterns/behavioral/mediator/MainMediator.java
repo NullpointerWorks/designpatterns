@@ -145,7 +145,7 @@ class MediatedJTextField extends JTextField implements KeyListener
 }
 
 /*
- * Mediator extension for a JTextField
+ * Mediator extension for a JPasswordField
  */
 class MediatedJPasswordField extends JPasswordField implements KeyListener
 {
