@@ -13,18 +13,21 @@ import javax.swing.JTextArea;
 /**
  * Momento Pattern
  * 
- * 
+ * A momento pattern implementation without using nested classes.
  * 
  */
 public class MainMomentoIntermediate
 {
 	public static void main(String[] args) 
 	{
-		JTextArea textarea = new JTextArea();
+		History history = new History();
+		
+		MomentoJTextArea textarea = new MomentoJTextArea();
 		textarea.setSize(140,170);
 		textarea.setPreferredSize(textarea.getSize());
 		textarea.setWrapStyleWord(true);
 		textarea.setLineWrap(true);
+		history.push( textarea.getSnapshot() );
 		
 		JButton button1 = new JButton();
 		button1.setText("Save Snapshot");
@@ -35,7 +38,7 @@ public class MainMomentoIntermediate
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				
+				history.push( textarea.getSnapshot() );
 			}
 		});
 		
@@ -48,7 +51,7 @@ public class MainMomentoIntermediate
 			@Override
 			public void actionPerformed(ActionEvent e) 
 			{
-				
+				textarea.restore( history.pop() );
 			}
 		});
 		
@@ -88,8 +91,6 @@ class History
 	
 	public Momento pop()
 	{
-		// if no momento's are stored, return a default null object
-		if (h.size()==0) return new Momento() {public void restore(){}};
 		return h.remove(0);
 	}
 }
@@ -100,12 +101,39 @@ class History
  */
 interface Momento
 {
-	void restore();
+	
 }
 
+class MomentoJTextArea extends JTextArea
+{
+	private static final long serialVersionUID = 5097679541077642517L;
+	
+	public Momento getSnapshot()
+	{
+		String text = this.getText();
+		return new TextAreaMomento(text);
+	}
+	
+	public void restore(Momento m)
+	{
+		TextAreaMomento cm = (TextAreaMomento)m; // this throws an error if the cast fails
+		setText( cm.getTextContent() );
+	}
+}
 
-
-
-
-
-
+/*
+ * nested momento class which has access to the textfield's private state
+ */
+class TextAreaMomento implements Momento
+{
+	private String text;
+	public TextAreaMomento(String t) 
+	{
+		text = t;
+	}
+	
+	public String getTextContent() 
+	{
+		return text;
+	}
+}
