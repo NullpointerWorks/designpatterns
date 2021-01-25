@@ -39,11 +39,32 @@ package architecturalpatterns.mvc1;
  *    |______| <-- |____________| <-- |_______|
  * </pre>
  * The View and Model are unaware of eachother's existence. The controller acts as
- * a mediator between the two. 
- * 
- * 
- * 
+ * a mediator between the two. The above depicted architecture can be achieved in
+ * multiple ways.<br>
+ * Method one:
+ * <pre>
+ * - Pass a reference of the Controller to the View.
+ * - Pass a reference of the View and Model to the Controller.
+ * - Pass a reference of the Controller to the Model.
+ * </pre>
+ * This is the most straightforward way to couple the objects to initialize MVC. 
+ * However this approach has some severe drawbacks. All these references result 
+ * in strong coupling that makes the architecture hard to maintain down the line.
+ * <br>
+ * To reduce the amount of coupling, the Controller reference in the Model could be
+ * removed to make the Controller responsible for retrieving data from the Model.
  * <br><br>
+ * Method two:
+ * <pre>
+ * - Pass a reference of the View and Model to the Controller.
+ * - The Controller sets commands to the View.
+ * - The Model depends on the controller to retrieve data.
+ * </pre>
+ * This approach makes the Controller aware of the View and Model, as per design,
+ * and tells the View what command to execute when the UI responds to input. The
+ * View would have a weak coupling with a command interface instead of concrete 
+ * Controller implementations. 
+ * 
  */
 public class MainModelViewController1
 {

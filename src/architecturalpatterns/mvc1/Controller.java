@@ -58,7 +58,7 @@ class AdditionCommand implements ActionListener
 		catch(NumberFormatException ex)
 		{
 			System.err.println("Please enter two integer numbers");
-			// you could update the UI with an error
+			// perhaps update the UI with an error message
 			return;
 		}
 		
