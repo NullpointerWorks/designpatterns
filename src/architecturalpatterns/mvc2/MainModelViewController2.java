@@ -18,12 +18,14 @@ package architecturalpatterns.mvc2;
  * 
  * 
  * 
- * 
  */
 public class MainModelViewController2
 {
 	public static void main(String[] args)
 	{
-		
+		View view = new View();
+		Model model = new Model(view);
+		new Controller(model, view);
+		view.setVisible(true);
 	}
 }
