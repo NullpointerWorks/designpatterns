@@ -110,8 +110,6 @@ class CommandHistory implements History
 {
 	private List<Command> history = new ArrayList<Command>();
 	
-	public CommandHistory() {}
-	
 	@Override
 	public void push(Command cmd)
 	{
