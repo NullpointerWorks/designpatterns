@@ -19,12 +19,7 @@ public class MainCommand
 {
 	public static void main(String[] args)
 	{
-		new MainCommand();
-	}
-	
-	public MainCommand()
-	{
-		CommandHistory history = new CommandHistory();
+		History history = new CommandHistory();
 		
 		JPanel panel = new JPanel();
 		panel.setSize(400,320);
@@ -50,7 +45,7 @@ class Button extends JButton implements ActionListener
 {
 	private static final long serialVersionUID = -5245394995966152954L;
 	
-	private CommandHistory history;
+	private History history;
 	private Command command = new NullCommand();
 	
 	public Button()
@@ -58,7 +53,7 @@ class Button extends JButton implements ActionListener
 		addActionListener(this);
 	}
 	
-	public void setCommand(Command cmd, CommandHistory his)
+	public void setCommand(Command cmd, History his)
 	{
 		command = cmd;
 		history = his;
@@ -105,17 +100,25 @@ class ClickCommand implements Command
 /*
  * a class to keep track of all previous commands.
  */
-class CommandHistory
+interface History
+{
+	void push(Command cmd);
+	Command pop();
+}
+
+class CommandHistory implements History
 {
 	private List<Command> history = new ArrayList<Command>();
 	
 	public CommandHistory() {}
 	
+	@Override
 	public void push(Command cmd)
 	{
 		history.add(cmd);
 	}
 	
+	@Override
 	public Command pop()
 	{
 		int i = history.size()-1;
