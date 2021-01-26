@@ -90,6 +90,7 @@ class XMLExportVisitor implements Visitor
 	@Override
 	public void onBegin() 
 	{
+		System.out.println("<?xml version=\"1.0\" encoding=\"UTF-8\"?>");
 		System.out.println("<city>");
 		System.out.println("    <zones>");
 	}
