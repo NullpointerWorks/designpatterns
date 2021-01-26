@@ -104,23 +104,6 @@ interface Momento
 	
 }
 
-class MomentoJTextArea extends JTextArea
-{
-	private static final long serialVersionUID = 5097679541077642517L;
-	
-	public Momento getSnapshot()
-	{
-		String text = this.getText();
-		return new TextAreaMomento(text);
-	}
-	
-	public void restore(Momento m)
-	{
-		TextAreaMomento cm = (TextAreaMomento)m; // this throws an error if the cast fails
-		setText( cm.getTextContent() );
-	}
-}
-
 /*
  * nested momento class which has access to the textfield's private state
  */
@@ -135,5 +118,22 @@ class TextAreaMomento implements Momento
 	public String getTextContent() 
 	{
 		return text;
+	}
+}
+
+class MomentoJTextArea extends JTextArea
+{
+	private static final long serialVersionUID = 5097679541077642517L;
+	
+	public Momento getSnapshot()
+	{
+		String text = this.getText();
+		return new TextAreaMomento(text);
+	}
+	
+	public void restore(Momento m)
+	{
+		TextAreaMomento cm = (TextAreaMomento)m; // this throws an error if the cast fails
+		setText( cm.getTextContent() );
 	}
 }
