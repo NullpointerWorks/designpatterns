@@ -124,6 +124,12 @@ class MomentoJTextArea extends JTextArea
 		return new Snapshot(text);
 	}
 	
+	// a private method to demonstrate access
+	private void restoreText(String text)
+	{
+		setText(text);
+	}
+	
 	/*
 	 * nested momento class which has access to the textfield's private state
 	 */
@@ -138,7 +144,7 @@ class MomentoJTextArea extends JTextArea
 		@Override
 		public void restore() 
 		{
-			setText(text);
+			restoreText(text);
 		}
 	}
 }
