@@ -25,11 +25,11 @@ public class MainCommand
 		panel.setSize(400,320);
 		panel.setPreferredSize(panel.getSize());
 		
-		Button button = new Button();
+		JButton button = new JButton();
 		button.setText("Click me!!");
 		button.setSize(140,40);
 		button.setPreferredSize(button.getSize());
-		button.setCommand(new ClickCommand(), history);
+		button.addActionListener( new ClickCommand(history) );
 		panel.add(button);
 		
 		JFrame window = new JFrame();
@@ -41,37 +41,16 @@ public class MainCommand
 	}
 }
 
-class Button extends JButton implements ActionListener
-{
-	private static final long serialVersionUID = -5245394995966152954L;
-	
-	private History history;
-	private Command command = new NullCommand();
-	
-	public Button()
-	{
-		addActionListener(this);
-	}
-	
-	public void setCommand(Command cmd, History his)
-	{
-		command = cmd;
-		history = his;
-	}
-	
-	@Override
-	public void actionPerformed(ActionEvent e) 
-	{
-		history.push(command);
-		command.execute();
-	}
-}
-
 /*
- * command interface
+ * command interface hijacking the AWT ActionListener
  */
-interface Command
+interface Command extends ActionListener
 {
+	default void actionPerformed(ActionEvent e) 
+	{
+		execute();
+	}
+	
 	void execute();
 }
 
@@ -85,14 +64,17 @@ class NullCommand implements Command
 
 class ClickCommand implements Command
 {
-	public ClickCommand()
+	History history;
+	
+	public ClickCommand(History his)
 	{
-		
+		history = his;
 	}
 	
 	@Override
 	public void execute() 
 	{
+		history.push(this);
 		System.out.println("Executing a clicking command..");
 	}
 }
