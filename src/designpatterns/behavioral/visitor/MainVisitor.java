@@ -6,10 +6,13 @@ import java.util.List;
 /**
  * Visitor Pattern
  * 
- * 
+ * This pattern lets you separate an algorithm from the affected class. Think
+ * of this pattern as an expansion on the Command pattern. It also has some
+ * likeness to the Template pattern except from having a final template method
+ * and a specific order of operations.
  * 
  */
-public class MainVisitor 
+public class MainVisitor
 {
 	public static void main(String[] args) 
 	{
@@ -19,26 +22,38 @@ public class MainVisitor
 		zones.addZone( new Commercial() );
 		zones.addZone( new Recreation() );
 		
-		Visitor notify = new PrintVisitor();
+		Visitor notify = new TourVisitor();
+		Visitor export = new XMLExportVisitor();
+		
 		zones.checkZones(notify);
+		zones.checkZones(export);
 		
 	}
 }
 
 /*
  * Define a visitor interface that includes methods for handling different 
- * class signatures and create a concrete visitor to act on it.
+ * class signatures and create a concrete visitor to act on it. In this
+ * example I've added a printing and XML visitor to demonstrate versatility.
  */
 interface Visitor
 {
+	void onBegin();
 	void onResidental(Residental r);
 	void onIndustrial(Industrial i);
 	void onCommercial(Commercial c);
 	void onRecreation(Recreation r);
+	void onEnd();
 }
 
-class PrintVisitor implements Visitor
+class TourVisitor implements Visitor
 {
+	@Override
+	public void onBegin() 
+	{
+		System.out.println( "Let's go on a tour!" );
+	}
+	
 	@Override
 	public void onResidental(Residental r) 
 	{
@@ -62,6 +77,61 @@ class PrintVisitor implements Visitor
 	{
 		System.out.println( r.getLayout() );
 	}
+	
+	@Override
+	public void onEnd() 
+	{
+		System.out.println( "And that wraps it up." );
+	}
+}
+
+class XMLExportVisitor implements Visitor
+{
+	@Override
+	public void onBegin() 
+	{
+		System.out.println("<city>");
+		System.out.println("    <zones>");
+	}
+	
+	@Override
+	public void onResidental(Residental r) 
+	{
+		System.out.println("        <residental>");
+		System.out.println("            "+r.getStyle() );
+		System.out.println("        </residental>");
+	}
+	
+	@Override
+	public void onIndustrial(Industrial i) 
+	{
+		System.out.println("        <industry>");
+		System.out.println("            "+i.getManufacturing() );
+		System.out.println("        </industry>");
+	}
+	
+	@Override
+	public void onCommercial(Commercial c) 
+	{
+		System.out.println("        <commerce>");
+		System.out.println("            "+c.getStreet() );
+		System.out.println("        </commerce>");
+	}
+	
+	@Override
+	public void onRecreation(Recreation r) 
+	{
+		System.out.println("        <recreation>");
+		System.out.println("            "+r.getLayout() );
+		System.out.println("        </recreation>");
+	}
+	
+	@Override
+	public void onEnd() 
+	{
+		System.out.println("    </zones>");
+		System.out.println("</city>");
+	}
 }
 
 /*
@@ -78,10 +148,12 @@ class CityZones
 	
 	public void checkZones(Visitor v)
 	{
+		v.onBegin();
 		for (Zone z : zones)
 		{
 			z.accept(v);
 		}
+		v.onEnd();
 	}
 }
 
