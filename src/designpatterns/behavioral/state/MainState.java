@@ -10,26 +10,27 @@ public class MainState
 {
 	public static void main(String[] args) 
 	{
-		State archer = new ArcherMachine();
-		State soldier = new SoldierMachine();
-		State wizard = new WizardMachine();
-		
 		Machine machine = new Machine();
+		State grow = new Growing();
+		State reduce = new Reducing();
 		
-		machine.setState(archer);
-		machine.doMovement();
-		machine.doAttack();
-		machine.doHeal();
-		System.out.println();
-		machine.setState(soldier);
-		machine.doMovement();
-		machine.doAttack();
-		machine.doHeal();
-		System.out.println();
-		machine.setState(wizard);
-		machine.doMovement();
-		machine.doAttack();
-		machine.doHeal();
+		float n1 = 5f;
+		float n2 = 2f;
+		float nR = 0f;
+		
+		machine.setState(grow);
+
+		nR = machine.operation(n1, n2);
+		System.out.println("= "+nR);
+		nR = machine.factor(n1, n2);
+		System.out.println("= "+nR);
+		
+		machine.setState(reduce);
+
+		nR = machine.operation(n1, n2);
+		System.out.println("= "+nR);
+		nR = machine.factor(n1, n2);
+		System.out.println("= "+nR);
 	}
 }
 
@@ -40,29 +41,19 @@ class Machine
 {
 	private State operations;
 	
-	public Machine()
-	{
-		
-	}
-	
 	public void setState(State s)
 	{
 		operations = s;
 	}
 	
-	public void doMovement() 
+	public float operation(float n1, float n2) 
 	{
-		operations.doMovement();
+		return operations.operation(n1, n2);
 	}
 	
-	public void doAttack() 
+	public float factor(float n1, float n2) 
 	{
-		operations.doAttack();
-	}
-	
-	public void doHeal() 
-	{
-		operations.doHeal();
+		return operations.factor(n1, n2);
 	}
 }
 
@@ -71,79 +62,42 @@ class Machine
  */
 interface State
 {
-	void doMovement();
-	void doAttack();
-	void doHeal();
+	float operation(float n1, float n2);
+	float factor(float n1, float n2);
 }
 
 /*
  * 
  */
-class ArcherMachine implements State
+class Growing implements State
 {
 	@Override
-	public void doMovement() 
+	public float operation(float n1, float n2) 
 	{
-		System.out.println("Sneaking to my target...");
+		return n1 + n2;
 	}
-	
+
 	@Override
-	public void doAttack() 
+	public float factor(float n1, float n2) 
 	{
-		System.out.println("Fireing my bow!");
-	}
-	
-	@Override
-	public void doHeal() 
-	{
-		System.out.println("Drinking a potion");
+		return n1 * n2;
 	}
 }
 
 /*
  * 
  */
-class SoldierMachine implements State
+class Reducing implements State
 {
 	@Override
-	public void doMovement() 
+	public float operation(float n1, float n2) 
 	{
-		System.out.println("Marching to my waypoint.");
+		return n1 - n2;
 	}
 	
 	@Override
-	public void doAttack() 
+	public float factor(float n1, float n2) 
 	{
-		System.out.println("Chaaarrggeee!");
-	}
-	
-	@Override
-	public void doHeal() 
-	{
-		System.out.println("Taking my regeneration potion.");
-	}
-}
-
-/*
- * 
- */
-class WizardMachine implements State
-{
-	@Override
-	public void doMovement() 
-	{
-		System.out.println("Gliding to a superiour position.");
-	}
-	
-	@Override
-	public void doAttack() 
-	{
-		System.out.println("You shall not passs!");
-	}
-	
-	@Override
-	public void doHeal() 
-	{
-		System.out.println("Casting my self-heal spell.");
+		return n1 / n2;
 	}
 }
