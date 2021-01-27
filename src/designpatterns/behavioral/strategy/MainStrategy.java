@@ -25,7 +25,9 @@ public class MainStrategy
 	public static void main(String[] args) 
 	{
 		GraphGenerator gg = new GraphGenerator(320, 240);
-		float[] yPoints = {120f, 160f, 80f, 50f, 190f};
+		
+		float[] yPoints = new float[10];
+		for (int n=9;n>=0;n--) yPoints[n] = (float)(20.0 + Math.random()*200.0);
 		
 		gg.setStrategy( new LinearInterpolation() );
 		ImageIcon lin = gg.generateImage(yPoints);
