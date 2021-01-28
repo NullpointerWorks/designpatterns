@@ -15,7 +15,7 @@ public class MainFlyweight
 {
 	public static void main(String[] args) 
 	{
-		final String line = "Test to be parsed by the pattern.";
+		final String line = "Text to be parsed by the pattern.";
 		
 		FlyweightList flyweight = new FlyweightList();
 		LetterWrapper[] sentence = flyweight.getText(line);
