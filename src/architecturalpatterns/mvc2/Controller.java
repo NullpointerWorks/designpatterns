@@ -16,7 +16,7 @@ class Controller
 		model = m;
 		view = v;
 		
-		// using AWT build-in command pattern
+		// using AWT build-in observer pattern as a command
 		view.addCalculationListener( new AdditionCommand(model,view) );
 	}
 }
