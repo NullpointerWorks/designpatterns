@@ -9,6 +9,7 @@ Design patterns are reusable implementations or practices that solve common prob
 * factory method
 * prototype
 * singleton
+* multiton
 
 ## Structural
 * adapter
