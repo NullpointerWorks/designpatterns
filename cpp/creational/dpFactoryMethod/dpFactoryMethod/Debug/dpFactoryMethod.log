@@ -1,0 +1,3 @@
+﻿  dpFactoryMethod.cpp
+dpFactoryMethod.obj : error LNK2001: unresolved external symbol "public: virtual class Item * __thiscall IFactory::getItem(void)" (?getItem@IFactory@@UAEPAVItem@@XZ)
+F:\Development\Cpp\workspaces\git\designpatterns_cpp\creational\dpFactoryMethod\Debug\dpFactoryMethod.exe : fatal error LNK1120: 1 unresolved externals
