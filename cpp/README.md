@@ -17,6 +17,7 @@ Design patterns are reusable implementations or practices that solve common prob
 * proxy
 * composite
 * decorator
+* flyweight
 
 ## Behavioral
 * <examples coming>
